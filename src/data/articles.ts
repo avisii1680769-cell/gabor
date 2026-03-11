@@ -13,6 +13,158 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "openclaw-multi-platform-guide",
+    title: "OpenCLAW多平台接入完全指南：微信、飞书、钉钉全覆盖",
+    excerpt: "手把手教你配置OpenCLAW接入微信、飞书、钉钉、Telegram等主流平台，实现一处配置，处处可用的AI助手体验。",
+    category: "教程",
+    date: "2026-03-12",
+    readTime: "8分钟",
+    icon: "📱",
+    tags: ["OpenCLAW", "多平台", "微信", "飞书", "钉钉", "Telegram", "配置"],
+    author: "OpenCLAW中文社区",
+    content: `
+      <p>OpenCLAW最强大的特性之一就是<strong>支持同时接入15+通讯平台</strong>。本文将手把手教你配置各个平台，让AI助手无处不在！</p>
+      
+      <h2>支持的平台一览</h2>
+      <h3>国内平台</h3>
+      <ul>
+        <li><strong>微信</strong> - 个人微信机器人</li>
+        <li><strong>飞书</strong> - 企业办公首选</li>
+        <li><strong>钉钉</strong> - 阿里巴巴生态</li>
+        <li><strong>企业微信</strong> - 腾讯企业办公</li>
+        <li><strong>QQ机器人</strong> - QQ群/私聊</li>
+      </ul>
+      
+      <h3>国际平台</h3>
+      <ul>
+        <li><strong>Telegram</strong> - 功能最丰富</li>
+        <li><strong>WhatsApp</strong> - 全球最流行</li>
+        <li><strong>Discord</strong> - 社区互动神器</li>
+        <li><strong>Slack</strong> - 团队协作</li>
+        <li><strong>Signal</strong> - 隐私优先</li>
+        <li><strong>iMessage</strong> - 苹果生态</li>
+      </ul>
+      
+      <h3>其他平台</h3>
+      <ul>
+        <li><strong>Matrix</strong> - 去中心化</li>
+        <li><strong>IRC</strong> - 经典协议</li>
+        <li><strong>Mattermost</strong> - 开源自部署</li>
+        <li><strong>Nostr</strong> - Web3协议</li>
+      </ul>
+      
+      <h2>配置指南：飞书</h2>
+      <h3>为什么推荐飞书？</h3>
+      <ul>
+        <li>企业级稳定性</li>
+        <li>官方API支持完善</li>
+        <li>丰富的机器人功能</li>
+        <li>消息格式支持好</li>
+      </ul>
+      
+      <h3>配置步骤</h3>
+      <ol>
+        <li>在飞书开放平台创建企业自建应用</li>
+        <li>获取App ID和App Secret</li>
+        <li>配置事件订阅和消息接收</li>
+        <li>运行配置命令：<pre><code>openclaw configure channels.feishu</code></pre></li>
+        <li>输入App ID和Secret</li>
+      </ol>
+      
+      <h2>配置指南：钉钉</h2>
+      <h3>配置步骤</h3>
+      <ol>
+        <li>在钉钉开放平台创建机器人</li>
+        <li>获取Client ID和Client Secret</li>
+        <li>配置消息回调地址</li>
+        <li>运行：<pre><code>openclaw configure channels.dingtalk</code></pre></li>
+      </ol>
+      
+      <h2>配置指南：微信</h2>
+      <h3>注意事项</h3>
+      <p>微信个人号接入有一定限制，推荐使用企业微信或ComWechat等方案。</p>
+      
+      <h3>推荐方案</h3>
+      <ul>
+        <li><strong>企业微信</strong> - 官方支持，最稳定</li>
+        <li><strong>ComWechat</strong> - 个人微信方案</li>
+        <li><strong>Wechaty</strong> - 多微信协议</li>
+      </ul>
+      
+      <h2>配置指南：Telegram</h2>
+      <h3>为什么推荐Telegram？</h3>
+      <ul>
+        <li>Bot API设计优秀</li>
+        <li>支持丰富的消息格式</li>
+        <li>群组功能强大</li>
+        <li>无需额外服务器验证</li>
+      </ul>
+      
+      <h3>配置步骤</h3>
+      <ol>
+        <li>在Telegram中找@BotFather创建机器人</li>
+        <li>获取Bot Token</li>
+        <li>运行：<pre><code>openclaw configure channels.telegram</code></pre></li>
+        <li>输入Bot Token</li>
+      </ol>
+      
+      <h2>配置指南：Discord</h2>
+      <h3>配置步骤</h3>
+      <ol>
+        <li>在Discord开发者门户创建应用</li>
+        <li>创建Bot并获取Token</li>
+        <li>配置OAuth2权限</li>
+        <li>添加Bot到服务器</li>
+        <li>运行：<pre><code>openclaw configure channels.discord</code></pre></li>
+      </ol>
+      
+      <h2>安全设置</h2>
+      <h3>DM策略配置</h3>
+      <pre><code># 只响应配对用户
+channels.feishu.dmPolicy="pairing"
+
+# 允许所有人（不推荐）
+channels.feishu.dmPolicy="open"</code></pre>
+      
+      <h3>配对用户管理</h3>
+      <pre><code># 查看待配对用户
+openclaw pairing list
+
+# 批准配对
+openclaw pairing approve &lt;user-id&gt;</code></pre>
+      
+      <h2>最佳实践</h2>
+      <ol>
+        <li><strong>先配置一个平台</strong> - 熟悉流程后再添加其他平台</li>
+        <li><strong>设置DM策略</strong> - 防止陌生人滥用</li>
+        <li><strong>定期检查日志</strong> - 监控异常访问</li>
+        <li><strong>备份配置</strong> - 使用openclaw backup命令</li>
+      </ol>
+      
+      <h2>常见问题</h2>
+      <h3>Q: 消息发送失败？</h3>
+      <p>检查：1) Token是否正确 2) 权限是否配置 3) 网络是否畅通</p>
+      
+      <h3>Q: 机器人不响应？</h3>
+      <p>检查：1) Gateway是否运行 2) 用户是否在允许列表 3) 日志是否有报错</p>
+      
+      <h3>Q: 如何同时接入多个平台？</h3>
+      <p>可以！OpenCLAW支持同时配置多个平台，消息会统一路由到AI处理。</p>
+      
+      <h2>总结</h2>
+      <p>通过多平台接入，你可以：</p>
+      <ul>
+        <li>在工作中用飞书/钉钉</li>
+        <li>在生活中用微信</li>
+        <li>在国际交流中用Telegram</li>
+        <li>在社区中用Discord</li>
+      </ul>
+      <p><strong>同一个AI助手，在你需要的每个地方为你服务！</strong></p>
+      
+      <p>🦞 开始配置你的多平台AI助手吧！</p>
+    `,
+  },
+  {
     slug: "openclaw-vs-cloud-ai",
     title: "OpenCLAW vs 云端AI服务：为什么我选择本地部署？",
     excerpt: "深度对比OpenCLAW与ChatGPT、Claude等云端AI服务，从隐私、成本、可控性等维度分析本地部署AI助手的优势。",
