@@ -1,10 +1,16 @@
 {
   "version": 2,
-  "name": "openclaw-hub",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install",
-  "devCommand": "npm run dev",
-  "cleanUrls": true,
-  "trailingSlash": false
+  "builds": [
+    {
+      "src": "next.config.ts",
+      "use": "@vercel/next",
+      "config": {}
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
 }

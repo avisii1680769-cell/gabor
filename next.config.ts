@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  // Vercel specific config
+  transpilePackages: [],
 };
 
 export default nextConfig;
