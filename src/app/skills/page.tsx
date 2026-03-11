@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
+import { articles } from "@/data/articles";
 
 const skills = [
   {
@@ -9,6 +10,7 @@ const skills = [
     description: "网页自动化、数据抓取、UI测试",
     installs: "15K+",
     icon: "🌐",
+    articleSlug: "browser-automation-master",
   },
   {
     name: "ffmpeg",
@@ -16,6 +18,7 @@ const skills = [
     description: "视频剪辑、转码、压缩处理",
     installs: "12K+",
     icon: "🎬",
+    articleSlug: "ffmpeg-video-master",
   },
   {
     name: "xiaohongshu",
@@ -23,6 +26,7 @@ const skills = [
     description: "小红书内容创作、自动化发布",
     installs: "8K+",
     icon: "📕",
+    articleSlug: "xiaohongshu-automation-guide",
   },
   {
     name: "stock-analysis",
@@ -30,6 +34,7 @@ const skills = [
     description: "个股追踪、行情报告、价格提醒",
     installs: "6K+",
     icon: "📈",
+    articleSlug: "stock-analysis-skill-guide",
   },
   {
     name: "self-improving",
@@ -37,13 +42,7 @@ const skills = [
     description: "AI 自我进化、自动改进",
     installs: "5K+",
     icon: "🧠",
-  },
-  {
-    name: "desktop-control",
-    displayName: "Desktop Control",
-    description: "桌面自动化、鼠标键盘控制",
-    installs: "4K+",
-    icon: "🖥️",
+    articleSlug: "self-improving-agent-deep-dive",
   },
   {
     name: "transcriptapi",
@@ -51,6 +50,7 @@ const skills = [
     description: "YouTube 字幕获取、视频分析",
     installs: "3K+",
     icon: "📺",
+    articleSlug: null,
   },
   {
     name: "github-trending",
@@ -58,6 +58,7 @@ const skills = [
     description: "追踪 GitHub 热门项目",
     installs: "3K+",
     icon: "🔥",
+    articleSlug: "trending-skills-analysis",
   },
   {
     name: "trending-skills",
@@ -65,6 +66,7 @@ const skills = [
     description: "获取技能趋势排行",
     installs: "2K+",
     icon: "📊",
+    articleSlug: "top-10-skills-2026",
   },
   {
     name: "coze-web-search",
@@ -72,6 +74,7 @@ const skills = [
     description: "多引擎网络搜索",
     installs: "2K+",
     icon: "🔍",
+    articleSlug: null,
   },
   {
     name: "remotion-video",
@@ -79,6 +82,15 @@ const skills = [
     description: "用代码生成视频",
     installs: "1.5K+",
     icon: "🎥",
+    articleSlug: null,
+  },
+  {
+    name: "desktop-control",
+    displayName: "Desktop Control",
+    description: "桌面自动化、鼠标键盘控制",
+    installs: "4K+",
+    icon: "🖥️",
+    articleSlug: null,
   },
   {
     name: "automation-workflows",
@@ -86,6 +98,7 @@ const skills = [
     description: "自动化工作流设计",
     installs: "1K+",
     icon: "⚙️",
+    articleSlug: "multi-agent-collaboration",
   },
 ];
 
@@ -127,17 +140,48 @@ export default function SkillsPage() {
                     <span className="text-xs text-orange-600 font-medium">
                       {skill.installs} 安装
                     </span>
-                    <Link
-                      href={`/skill/${skill.name}`}
-                      className="text-sm text-gray-500 hover:text-orange-600 transition-colors"
-                    >
-                      详情 →
-                    </Link>
+                    {skill.articleSlug ? (
+                      <Link
+                        href={`/article/${skill.articleSlug}`}
+                        className="text-sm text-orange-600 hover:text-orange-700 transition-colors font-medium"
+                      >
+                        查看教程 →
+                      </Link>
+                    ) : (
+                      <span className="text-sm text-gray-400">敬请期待</span>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Articles Section */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
+            📚 相关教程
+          </h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {articles
+              .filter(a => a.category === "教程" || a.category === "Skills")
+              .slice(0, 4)
+              .map((article) => (
+                <Link
+                  key={article.slug}
+                  href={`/article/${article.slug}`}
+                  className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-lg transition flex items-center gap-3"
+                >
+                  <span className="text-2xl">{article.icon}</span>
+                  <div>
+                    <h3 className="font-semibold text-gray-800 dark:text-white">
+                      {article.title}
+                    </h3>
+                    <p className="text-sm text-gray-500">{article.category}</p>
+                  </div>
+                </Link>
+              ))}
+          </div>
         </div>
 
         {/* CTA */}

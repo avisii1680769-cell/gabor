@@ -26,6 +26,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
+  // 获取相关文章（同分类或同标签）
+  const relatedArticles = articles
+    .filter((a) => a.slug !== article.slug)
+    .filter((a) => 
+      a.category === article.category || 
+      a.tags?.some(tag => article.tags?.includes(tag))
+    )
+    .slice(0, 3);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -83,60 +92,38 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
           </div>
 
-          {/* Article Content Placeholder */}
+          {/* Article Content */}
           <div className="prose prose-orange dark:prose-invert max-w-none">
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 font-medium">
               {article.excerpt}
             </p>
 
-            <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl p-6 mb-8 border-l-4 border-orange-500">
-              <p className="text-gray-800 dark:text-gray-200">
-                <strong>本文内容正在完善中...</strong> 由于篇幅限制，完整内容将陆续更新，敬请期待！
-              </p>
-            </div>
+            {/* 文章正文内容 */}
+            <div 
+              className="text-gray-700 dark:text-gray-300 leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: article.content || '' }}
+            />
 
-            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-              文章概要
-            </h2>
-
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
-              这是一篇关于 {article.category} 的文章，涵盖了 {article.tags?.join("、")} 相关内容。
-              预计阅读时间 {article.readTime}。
-            </p>
-
-            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-              相关资源
-            </h2>
-
-            <ul className="list-disc pl-5 space-y-2 mb-6">
-              <li className="text-gray-600 dark:text-gray-300">
-                <Link
-                  href="https://docs.openclaw.ai"
-                  className="text-orange-600 hover:underline"
-                  target="_blank"
-                >
-                  OpenClaw 官方文档
-                </Link>
-              </li>
-              <li className="text-gray-600 dark:text-gray-300">
-                <Link
-                  href="https://clawhub.com"
-                  className="text-orange-600 hover:underline"
-                  target="_blank"
-                >
-                  ClawHub 技能商店
-                </Link>
-              </li>
-              <li className="text-gray-600 dark:text-gray-300">
-                <Link
-                  href="https://github.com/openclaw/openclaw"
-                  className="text-orange-600 hover:underline"
-                  target="_blank"
-                >
-                  OpenClaw GitHub 仓库
-                </Link>
-              </li>
-            </ul>
+            {/* 相关文章推荐 */}
+            {relatedArticles.length > 0 && (
+              <div className="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
+                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
+                  📖 相关文章推荐
+                </h2>
+                <ul className="space-y-3">
+                  {relatedArticles.map((a) => (
+                    <li key={a.slug}>
+                      <Link
+                        href={`/article/${a.slug}`}
+                        className="text-orange-600 hover:text-orange-700 hover:underline font-medium"
+                      >
+                        {a.icon} {a.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           {/* Author */}
@@ -147,10 +134,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </div>
               <div>
                 <p className="font-semibold text-gray-800 dark:text-white">
-                  {article.author || "匿名作者"}
+                  {article.author || "OpenClaw Hub"}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  OpenClaw Hub 贡献者
+                  OpenClaw Hub 内容团队
                 </p>
               </div>
             </div>
@@ -160,7 +147,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {/* More Articles */}
         <div className="mt-12">
           <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
-            更多文章
+            更多精彩文章
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {articles
