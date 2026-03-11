@@ -13,6 +13,68 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "openclaw-hub-launch-2026",
+    title: "OpenClaw Hub 网站正式上线！一站式获取 OpenClaw 资讯",
+    excerpt: "OpenClaw Hub 网站正式上线！作为 OpenClaw 社区的内容中心，为用户提供最新的资讯、教程和 Skills 推荐。响应式设计支持所有设备访问...",
+    category: "新闻",
+    date: "2026-03-11",
+    readTime: "3分钟",
+    icon: "🎉",
+    tags: ["OpenClaw", "Hub", "上线", "社区"],
+    author: "运营团队",
+    content: `
+      <p>经过紧张的开发工作，<strong>OpenClaw Hub</strong> 网站终于正式上线了！这个网站将作为 OpenClaw 社区的内容中心，为用户提供最新的资讯、教程和 Skills 推荐。</p>
+      
+      <h2>📌 主要功能</h2>
+      
+      <h3>1. 资讯中心</h3>
+      <p>汇聚 OpenClaw 相关的最新动态：</p>
+      <ul>
+        <li>版本更新公告</li>
+        <li>社区活动信息</li>
+        <li>技术文章分享</li>
+      </ul>
+      
+      <h3>2. Skills 市场</h3>
+      <p>发现和安装各种 Skills：</p>
+      <ul>
+        <li>🌐 浏览器自动化</li>
+        <li>🎬 视频处理</li>
+        <li>📝 内容创作</li>
+        <li>📊 数据分析</li>
+      </ul>
+      
+      <h3>3. 教程中心</h3>
+      <p>从入门到进阶的完整教程：</p>
+      <ul>
+        <li>快速开始指南</li>
+        <li>进阶使用技巧</li>
+        <li>实战案例分析</li>
+      </ul>
+      
+      <h2>🔗 访问方式</h2>
+      <p>网站地址：<a href="https://heroic-syrniki-5f956f.netlify.app">https://heroic-syrniki-5f956f.netlify.app</a></p>
+      
+      <h2>📱 响应式设计</h2>
+      <p>网站支持所有设备访问：</p>
+      <ul>
+        <li>💻 桌面端完美适配</li>
+        <li>📱 移动端友好界面</li>
+        <li>📲 平板端舒适阅读</li>
+      </ul>
+      
+      <h2>💬 反馈与建议</h2>
+      <p>如果您对网站有任何建议，欢迎通过以下方式反馈：</p>
+      <ul>
+        <li>在 GitHub 提交 Issue</li>
+        <li>在 Discord 社区讨论</li>
+        <li>直接联系运营团队</li>
+      </ul>
+      
+      <p>感谢您的支持！让我们一起打造更好的 OpenClaw 社区！🦞</p>
+    `,
+  },
+  {
     slug: "openclaw-2026-major-update",
     title: "OpenClaw 2026重大更新：AI Agent 能力全面升级",
     excerpt: "OpenClaw 发布了2026年首个重大更新版本，新增了多项 AI Agent 能力，包括增强的上下文理解、多模态支持和自动化工作流...",
