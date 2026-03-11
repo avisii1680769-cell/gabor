@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-12">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {/* Logo Section */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
@@ -81,38 +81,6 @@ export function Footer() {
                   className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400"
                 >
                   GitHub
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold text-gray-800 dark:text-white mb-4">
-              其他
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/about"
-                  className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400"
-                >
-                  关于我们
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/privacy"
-                  className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400"
-                >
-                  隐私政策
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/terms"
-                  className="text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400"
-                >
-                  使用条款
                 </Link>
               </li>
             </ul>
