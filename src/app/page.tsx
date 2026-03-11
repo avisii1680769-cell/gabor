@@ -136,7 +136,7 @@ export default function Home() {
                 📱 微信添加
               </p>
               <p className="text-2xl md:text-3xl font-bold mb-4">
-                gabol_lu
+                gabor_lu
               </p>
               
               {/* QR Code */}
