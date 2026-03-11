@@ -135,8 +135,20 @@ export default function Home() {
               <p className="text-sm opacity-80 mb-2">
                 📱 微信添加
               </p>
-              <p className="text-2xl md:text-3xl font-bold">
+              <p className="text-2xl md:text-3xl font-bold mb-4">
                 gabol_lu
+              </p>
+              
+              {/* QR Code */}
+              <div className="inline-block bg-white p-3 rounded-lg">
+                <img 
+                  src="/wechat-qr.png" 
+                  alt="微信二维码" 
+                  className="w-32 h-32 md:w-40 md:h-40"
+                />
+              </div>
+              <p className="text-sm opacity-80 mt-2">
+                扫码添加微信
               </p>
             </div>
             
