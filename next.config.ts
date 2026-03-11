@@ -1,14 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  distDir: 'dist',
+  // 移除静态导出，使用Vercel默认构建
   images: {
     unoptimized: true,
   },
-  trailingSlash: true,
-  // Vercel specific config
-  transpilePackages: [],
 };
 
 export default nextConfig;
