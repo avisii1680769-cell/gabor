@@ -13,6 +13,146 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "openclaw-beginner-guide",
+    title: "OpenCLAW零基础入门指南：打造你的专属AI助手",
+    excerpt: "从零开始配置OpenCLAW：安装、配置、接入通讯平台、选择AI模型，手把手教你打造属于自己的AI助手。",
+    category: "教程",
+    date: "2026-03-11",
+    readTime: "10分钟",
+    icon: "🎯",
+    tags: ["OpenCLAW", "入门", "教程", "AI助手", "配置"],
+    author: "OpenCLAW中文社区",
+    content: `
+      <p>想拥有一个<strong>真正属于自己的AI助手</strong>？OpenCLAW让你零门槛实现这个愿望！本指南将手把手教你如何从零开始配置OpenCLAW。</p>
+      
+      <h2>📋 准备工作</h2>
+      <h3>系统要求</h3>
+      <ul>
+        <li>Node.js ≥ 22.x</li>
+        <li>macOS / Linux / Windows (WSL2)</li>
+        <li>至少2GB可用内存</li>
+      </ul>
+      
+      <h3>需要的账号</h3>
+      <ul>
+        <li>至少一个AI模型API（OpenAI/Claude/Gemini等）</li>
+        <li>可选：通讯平台账号（微信/飞书/钉钉等）</li>
+      </ul>
+      
+      <h2>🚀 第一步：安装OpenCLAW</h2>
+      <pre><code># 使用npm安装
+npm install -g openclaw@latest
+
+# 验证安装
+openclaw --version</code></pre>
+      
+      <h2>⚙️ 第二步：运行配置向导</h2>
+      <pre><code>openclaw onboard --install-daemon</code></pre>
+      <p>向导会引导你完成：</p>
+      <ol>
+        <li><strong>Gateway配置</strong> - 设置本地服务端口号（默认18789）</li>
+        <li><strong>AI模型配置</strong> - 添加你的API密钥</li>
+        <li><strong>通讯平台配置</strong> - 选择要接入的平台</li>
+        <li><strong>技能安装</strong> - 安装常用技能</li>
+      </ol>
+      
+      <h2>🤖 第三步：配置AI模型</h2>
+      <h3>推荐模型配置方案</h3>
+      <table>
+        <tr><th>使用场景</th><th>推荐模型</th><th>成本</th></tr>
+        <tr><td>日常使用</td><td>GPT-4o mini / Claude 3 Haiku</td><td>低</td></tr>
+        <tr><td>编程开发</td><td>GPT-4o / Claude 3.5 Sonnet</td><td>中</td></tr>
+        <tr><td>深度研究</td><td>GPT-4 / Claude 3 Opus</td><td>高</td></tr>
+        <tr><td>离线使用</td><td>Ollama本地模型</td><td>免费</td></tr>
+      </table>
+      
+      <h3>添加多个模型（推荐）</h3>
+      <pre><code>openclaw configure models</code></pre>
+      <p>设置主模型和备用模型，实现自动故障转移。</p>
+      
+      <h2>💬 第四步：接入通讯平台</h2>
+      <h3>推荐的接入顺序</h3>
+      <ol>
+        <li><strong>飞书/钉钉</strong> - 国内用户首选，企业级稳定</li>
+        <li><strong>Telegram</strong> - 国际用户，功能丰富</li>
+        <li><strong>微信</strong> - 个人使用最方便</li>
+        <li><strong>Discord</strong> - 社区互动</li>
+      </ol>
+      
+      <h3>配置示例（飞书）</h3>
+      <pre><code>openclaw configure channels.feishu
+# 输入你的飞书机器人配置信息</code></pre>
+      
+      <h2>🛠️ 第五步：安装必备技能</h2>
+      <h3>新手推荐技能清单</h3>
+      <table>
+        <tr><th>技能</th><th>用途</th><th>安装命令</th></tr>
+        <tr><td>browser</td><td>浏览器自动化</td><td>openclaw skills install browser</td></tr>
+        <tr><td>github</td><td>GitHub管理</td><td>openclaw skills install github</td></tr>
+        <tr><td>weather</td><td>天气查询</td><td>openclaw skills install weather</td></tr>
+        <tr><td>todo</td><td>待办事项</td><td>openclaw skills install todo</td></tr>
+      </table>
+      
+      <h2>🎓 第六步：学习基础命令</h2>
+      <h3>常用CLI命令</h3>
+      <pre><code># 查看状态
+openclaw status
+
+# 发送消息测试
+openclaw agent --message "你好"
+
+# 查看日志
+openclaw logs --follow
+
+# 更新系统
+openclaw update
+
+# 备份配置
+openclaw backup create</code></pre>
+      
+      <h2>🔐 第七步：安全设置</h2>
+      <h3>必做的安全措施</h3>
+      <ol>
+        <li><strong>设置DM策略</strong> - 防止陌生人骚扰</li>
+        <li><strong>配置允许列表</strong> - 只接收可信用户的消息</li>
+        <li><strong>定期备份</strong> - 使用backup命令</li>
+        <li><strong>API密钥管理</strong> - 使用环境变量存储敏感信息</li>
+      </ol>
+      
+      <h2>💡 使用技巧</h2>
+      <h3>提高效率的小技巧</h3>
+      <ul>
+        <li>使用<strong>/reasoning</strong>开启深度思考模式</li>
+        <li>使用<strong>--thinking high</strong>获得更详细的回答</li>
+        <li>创建快捷指令处理重复任务</li>
+        <li>使用cron定时执行自动化任务</li>
+      </ul>
+      
+      <h2>🆘 常见问题解决</h2>
+      <h3>Q: Gateway启动失败？</h3>
+      <p>检查端口是否被占用：lsof -i :18789</p>
+      
+      <h3>Q: AI不回复消息？</h3>
+      <p>检查：1) API密钥是否正确 2) 模型额度是否充足 3) Gateway是否运行</p>
+      
+      <h3>Q: 如何查看日志？</h3>
+      <pre><code>openclaw logs --follow</code></pre>
+      
+      <h2>📚 进阶学习路径</h2>
+      <ol>
+        <li>阅读官方文档：docs.openclaw.ai</li>
+        <li>加入Discord社区：discord.gg/clawd</li>
+        <li>学习技能开发</li>
+        <li>探索高级功能（Canvas、Node等）</li>
+      </ol>
+      
+      <h2>🎉 恭喜！</h2>
+      <p>现在你已经拥有了一个<strong>完全属于自己</strong>的AI助手！开始探索OpenCLAW的无限可能吧！</p>
+      
+      <p><strong>下一步</strong>：尝试让AI帮你完成第一个任务，体验真正的个人AI助手！ 🦞</p>
+    `,
+  },
+  {
     slug: "openclaw-2026-v308-release",
     title: "OpenCLAW 2026.3.8版本发布 - 开源个人AI助手完全指南",
     excerpt: "OpenCLAW 2026.3.8版本重磅更新：本地部署AI助手，支持15+平台接入，完全开源免费。详细安装教程、功能介绍与使用指南。",
