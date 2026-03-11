@@ -121,27 +121,31 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Newsletter */}
-        <section className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-            📧 订阅更新
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
-            每周获取 OpenClaw 最新 Skills 和教程
-          </p>
-          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="输入你的邮箱"
-              className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
-            />
-            <button
-              type="submit"
-              className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition"
-            >
-              订阅
-            </button>
-          </form>
+        {/* WeChat Promotion */}
+        <section className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-8 md:p-12 text-center text-white">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              💬 联系我们
+            </h2>
+            <p className="text-lg opacity-90 mb-6">
+              有问题？想要部署自己的网站？
+            </p>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6">
+              <p className="text-sm opacity-80 mb-2">
+                📱 微信添加
+              </p>
+              <p className="text-2xl md:text-3xl font-bold">
+                gabol_lu
+              </p>
+            </div>
+            
+            <div className="space-y-2 text-sm opacity-90">
+              <p>✅ 免费咨询 OpenClaw 部署问题</p>
+              <p>✅ 获得一对一技术指导</p>
+              <p>✅ 加入 OpenClaw 爱好者交流群</p>
+            </div>
+          </div>
         </section>
       </main>
 
