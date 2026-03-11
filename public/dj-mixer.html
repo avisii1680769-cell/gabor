@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Mixer Pro - Real-time DJ Performance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 标题 */
+        .title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .title h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 60px rgba(255, 107, 107, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.5)); }
+            to { filter: drop-shadow(0 0 40px rgba(72, 219, 251, 0.5)); }
+        }
+
+        .title p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-top: 10px;
+        }
+
+        /* DJ控制台 */
+        .console {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .console {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .deck {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .deck:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .deck-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .deck-title {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .deck-a .deck-title { color: #ff6b6b; }
+        .deck-b .deck-title { color: #48dbfb; }
+
+        .disc {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .deck-a .disc {
+            background: conic-gradient(from 0deg, #ff6b6b33, #ff6b6b66, #ff6b6b33);
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .deck-b .disc {
+            background: conic-gradient(from 0deg, #48dbfb33, #48dbfb66, #48dbfb33);
+            box-shadow: 0 0 30px rgba(72, 219, 251, 0.3);
+        }
+
+        .disc.playing {
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .disc-inner {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: #1a1a2e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid;
+        }
+
+        .deck-a .disc-inner { border-color: #ff6b6b; }
+        .deck-b .disc-inner { border-color: #48dbfb; }
+
+        .disc-beat {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            animation: pulse 0.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        /* 控制组件 */
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #a0a0a0;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        select option {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .deck-a input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ff6b6b;
+        }
+
+        .deck-b input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #48dbfb;
+            cursor: pointer;
+            box-shadow: 0 0 15px #48dbfb;
+        }
+
+        /* 中央控制区 */
+        .center-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        /* DJ人物 */
+        .dj-avatar {
+            position: relative;
+            width: 200px;
+            height: 280px;
+        }
+
+        .dj-head {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ffd93d, #f39c12);
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .dj-headphone {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #2d2d2d;
+            border-radius: 50%;
+            top: 15px;
+        }
+
+        .dj-headphone.left { left: -10px; }
+        .dj-headphone.right { right: -10px; }
+
+        .dj-headphone::after {
+            content: '🎧';
+            font-size: 14px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .dj-body {
+            width: 100px;
+            height: 120px;
+            background: linear-gradient(180deg, #9b59b6, #e74c3c);
+            border-radius: 30px 30px 20px 20px;
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .dj-arm {
+            width: 30px;
+            height: 100px;
+            background: linear-gradient(180deg, #9b59b6, #e74c3c);
+            border-radius: 15px;
+            position: absolute;
+            top: 110px;
+            transform-origin: top center;
+            z-index: 0;
+        }
+
+        .dj-arm.left {
+            left: 30px;
+            transform: rotate(20deg);
+        }
+
+        .dj-arm.right {
+            right: 30px;
+            transform: rotate(-20deg);
+        }
+
+        .dj-legs {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .dj-leg {
+            width: 30px;
+            height: 60px;
+            background: #2d2d2d;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* 播放按钮 */
+        .play-btn {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 2rem;
+        }
+
+        .play-btn.playing {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            box-shadow: 0 0 40px rgba(231, 76, 60, 0.6);
+            animation: pulse-btn 1s ease-in-out infinite;
+        }
+
+        .play-btn:not(.playing) {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            box-shadow: 0 0 40px rgba(46, 204, 113, 0.6);
+        }
+
+        @keyframes pulse-btn {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* BPM显示 */
+        .bpm-display {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px 40px;
+            border-radius: 20px;
+            border: 2px solid #48dbfb;
+            text-align: center;
+        }
+
+        .bpm-label {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .bpm-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #48dbfb;
+            text-shadow: 0 0 20px rgba(72, 219, 251, 0.5);
+        }
+
+        /* Crossfader */
+        .crossfader-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .crossfader-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .crossfader-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .crossfader-label {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .crossfader-label.a { color: #ff6b6b; }
+        .crossfader-label.b { color: #48dbfb; }
+
+        .crossfader {
+            flex: 1;
+            height: 12px;
+            -webkit-appearance: none;
+            background: linear-gradient(90deg, #ff6b6b, #9b59b6, #48dbfb);
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .crossfader::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .crossfader-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #a0a0a0;
+        }
+
+        /* 动画类 */
+        .arm-animate-left {
+            animation: arm-left 0.5s ease-in-out infinite;
+        }
+
+        .arm-animate-right {
+            animation: arm-right 0.5s ease-in-out infinite;
+        }
+
+        @keyframes arm-left {
+            0%, 100% { transform: rotate(20deg); }
+            50% { transform: rotate(-30deg); }
+        }
+
+        @keyframes arm-right {
+            0%, 100% { transform: rotate(-20deg); }
+            50% { transform: rotate(30deg); }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 标题 -->
+        <div class="title">
+            <h1>🎧 DJ MIXER PRO</h1>
+            <p>Real-time DJ Performance with Animation</p>
+        </div>
+
+        <!-- DJ控制台 -->
+        <div class="console">
+            <!-- Deck A -->
+            <div class="deck deck-a">
+                <div class="deck-header">
+                    <h2 class="deck-title">DECK A</h2>
+                    <span style="font-size: 2rem;">💿</span>
+                </div>
+                
+                <div class="disc" id="disc-a">
+                    <div class="disc-inner">
+                        <div class="disc-beat"></div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>🎵 Select Track</span>
+                    </div>
+                    <select id="track-a">
+                        <option value="1">Techno Beat #1 - 128 BPM</option>
+                        <option value="2">House Groove #2 - 126 BPM</option>
+                        <option value="3">Deep Bass #3 - 124 BPM</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>⚡ BPM: <span id="bpm-a-value">128</span></span>
+                    </div>
+                    <input type="range" id="bpm-a" min="100" max="140" value="128">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>🔊 Volume: <span id="volume-a-value">80</span>%</span>
+                    </div>
+                    <input type="range" id="volume-a" min="0" max="100" value="80">
+                </div>
+            </div>
+
+            <!-- 中央控制 -->
+            <div class="center-controls">
+                <!-- DJ人物 -->
+                <div class="dj-avatar" id="dj-avatar">
+                    <div class="dj-head" id="dj-head">
+                        <div class="dj-headphone left"></div>
+                        <div class="dj-headphone right"></div>
+                    </div>
+                    <div class="dj-body" id="dj-body"></div>
+                    <div class="dj-arm left" id="dj-arm-left"></div>
+                    <div class="dj-arm right" id="dj-arm-right"></div>
+                    <div class="dj-legs">
+                        <div class="dj-leg"></div>
+                        <div class="dj-leg"></div>
+                    </div>
+                </div>
+
+                <!-- 播放按钮 -->
+                <button class="play-btn" id="play-btn">
+                    <span id="play-icon">▶</span>
+                </button>
+
+                <!-- BPM显示 -->
+                <div class="bpm-display">
+                    <div class="bpm-label">MASTER BPM</div>
+                    <div class="bpm-value" id="master-bpm">127</div>
+                </div>
+            </div>
+
+            <!-- Deck B -->
+            <div class="deck deck-b">
+                <div class="deck-header">
+                    <h2 class="deck-title">DECK B</h2>
+                    <span style="font-size: 2rem;">💿</span>
+                </div>
+                
+                <div class="disc" id="disc-b">
+                    <div class="disc-inner">
+                        <div class="disc-beat"></div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>🎵 Select Track</span>
+                    </div>
+                    <select id="track-b">
+                        <option value="2">House Groove #2 - 126 BPM</option>
+                        <option value="1">Techno Beat #1 - 128 BPM</option>
+                        <option value="3">Deep Bass #3 - 124 BPM</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>⚡ BPM: <span id="bpm-b-value">126</span></span>
+                    </div>
+                    <input type="range" id="bpm-b" min="100" max="140" value="126">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>🔊 Volume: <span id="volume-b-value">80</span>%</span>
+                    </div>
+                    <input type="range" id="volume-b" min="0" max="100" value="80">
+                </div>
+            </div>
+        </div>
+
+        <!-- Crossfader -->
+        <div class="crossfader-section">
+            <h3 class="crossfader-title">🎚️ CROSSFADER</h3>
+            <div class="crossfader-container">
+                <span class="crossfader-label a">A</span>
+                <input type="range" class="crossfader" id="crossfader" min="0" max="100" value="50">
+                <span class="crossfader-label b">B</span>
+            </div>
+            <div class="crossfader-info" id="crossfader-info">Balanced (50/50)</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <span>🎵 DJ Mixer Pro Demo - Powered by Web Audio API</span>
+        </div>
+    </div>
+
+    <script>
+        // 状态
+        let isPlaying = false;
+        let bpm = 127;
+
+        // DOM元素
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const discA = document.getElementById('disc-a');
+        const discB = document.getElementById('disc-b');
+        const masterBpm = document.getElementById('master-bpm');
+        const crossfader = document.getElementById('crossfader');
+        const crossfaderInfo = document.getElementById('crossfader-info');
+        const djArmLeft = document.getElementById('dj-arm-left');
+        const djArmRight = document.getElementById('dj-arm-right');
+        const djBody = document.getElementById('dj-body');
+
+        // 控制元素
+        const bpmA = document.getElementById('bpm-a');
+        const bpmB = document.getElementById('bpm-b');
+        const bpmAValue = document.getElementById('bpm-a-value');
+        const bpmBValue = document.getElementById('bpm-b-value');
+        const volumeA = document.getElementById('volume-a');
+        const volumeB = document.getElementById('volume-b');
+        const volumeAValue = document.getElementById('volume-a-value');
+        const volumeBValue = document.getElementById('volume-b-value');
+
+        // 播放/暂停
+        playBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            
+            if (isPlaying) {
+                playBtn.classList.add('playing');
+                playIcon.textContent = '⏸';
+                discA.classList.add('playing');
+                discB.classList.add('playing');
+                
+                // 启动DJ动画
+                djArmLeft.classList.add('arm-animate-left');
+                djArmRight.classList.add('arm-animate-right');
+                
+                // 同步BPM
+                syncBPM();
+            } else {
+                playBtn.classList.remove('playing');
+                playIcon.textContent = '▶';
+                discA.classList.remove('playing');
+                discB.classList.remove('playing');
+                
+                // 停止DJ动画
+                djArmLeft.classList.remove('arm-animate-left');
+                djArmRight.classList.remove('arm-animate-right');
+            }
+        });
+
+        // BPM控制
+        bpmA.addEventListener('input', (e) => {
+            bpmAValue.textContent = e.target.value;
+            syncBPM();
+        });
+
+        bpmB.addEventListener('input', (e) => {
+            bpmBValue.textContent = e.target.value;
+            syncBPM();
+        });
+
+        // 音量控制
+        volumeA.addEventListener('input', (e) => {
+            volumeAValue.textContent = e.target.value;
+        });
+
+        volumeB.addEventListener('input', (e) => {
+            volumeBValue.textContent = e.target.value;
+        });
+
+        // 同步BPM (取两轨的平均值)
+        function syncBPM() {
+            const valA = parseInt(bpmA.value);
+            const valB = parseInt(bpmB.value);
+            bpm = Math.round((valA + valB) / 2);
+            masterBpm.textContent = bpm;
+            
+            // 根据BPM调整动画速度
+            const speed = 60 / bpm;
+            document.documentElement.style.setProperty('--anim-speed', speed + 's');
+        }
+
+        // Crossfader控制
+        crossfader.addEventListener('input', (e) => {
+            const value = e.target.value;
+            let info = '';
+            
+            if (value < 40) {
+                info = `More A (${100 - value}%)`;
+            } else if (value > 60) {
+                info = `More B (${value}%)`;
+            } else {
+                info = 'Balanced (50/50)';
+            }
+            
+            crossfaderInfo.textContent = info;
+            
+            // 可以在这里添加实际的crossfade音量控制
+        });
+
+        // 轨道选择
+        document.getElementById('track-a').addEventListener('change', (e) => {
+            const trackBpm = {
+                '1': 128,
+                '2': 126,
+                '3': 124
+            };
+            bpmA.value = trackBpm[e.target.value];
+            bpmAValue.textContent = trackBpm[e.target.value];
+            syncBPM();
+        });
+
+        document.getElementById('track-b').addEventListener('change', (e) => {
+            const trackBpm = {
+                '1': 128,
+                '2': 126,
+                '3': 124
+            };
+            bpmB.value = trackBpm[e.target.value];
+            bpmBValue.textContent = trackBpm[e.target.value];
+            syncBPM();
+        });
+
+        // 添加键盘快捷键
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                playBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
