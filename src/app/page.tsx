@@ -100,14 +100,13 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { name: "Skills 推荐", icon: "🛠️", count: 24 },
-              { name: "使用教程", icon: "📚", count: 18 },
-              { name: "社区动态", icon: "💬", count: 12 },
-              { name: "更新日志", icon: "📝", count: 8 },
+              { name: "Skills 推荐", icon: "🛠️", count: 4, path: "skills" },
+              { name: "使用教程", icon: "📚", count: 6, path: "jiaocheng" },
+              { name: "新闻", icon: "📰", count: 1, path: "xinwen" },
             ].map((cat) => (
               <Link
                 key={cat.name}
-                href={`/category/${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
+                href={`/category/${cat.path}`}
                 className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition text-center"
               >
                 <div className="text-4xl mb-2">{cat.icon}</div>
