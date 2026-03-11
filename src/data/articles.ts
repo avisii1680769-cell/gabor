@@ -13,6 +13,95 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "openclaw-2026-v308-release",
+    title: "OpenCLAW 2026.3.8版本发布 - 开源个人AI助手完全指南",
+    excerpt: "OpenCLAW 2026.3.8版本重磅更新：本地部署AI助手，支持15+平台接入，完全开源免费。详细安装教程、功能介绍与使用指南。",
+    category: "教程",
+    date: "2026-03-11",
+    readTime: "8分钟",
+    icon: "🦞",
+    tags: ["OpenCLAW", "AI助手", "开源", "教程", "2026"],
+    author: "OpenCLAW中文社区",
+    content: `
+      <p>在AI大爆发的今天，ChatGPT、Claude、Gemini等各种AI助手琳琅满目。但你是否曾担心过数据隐私、订阅费用、功能限制？<strong>OpenCLAW来了，它彻底改变了游戏规则！</strong></p>
+      
+      <h2>什么是OpenCLAW？</h2>
+      <p>OpenCLAW是一款<strong>完全开源、本地部署</strong>的个人AI助手框架。它不是那种"租用"的云服务，而是<strong>真正属于你</strong>的智能伙伴。</p>
+      
+      <h2>为什么选择OpenCLAW？</h2>
+      <table>
+        <tr><td>数据隐私</td><td>✅ 本地存储，完全掌控</td></tr>
+        <tr><td>月费成本</td><td>✅ 完全免费开源</td></tr>
+        <tr><td>平台数量</td><td>✅ 15+个平台</td></tr>
+        <tr><td>自定义能力</td><td>✅ 完全可定制</td></tr>
+        <tr><td>离线使用</td><td>✅ 支持本地模型</td></tr>
+      </table>
+      
+      <h2>核心功能亮点</h2>
+      <h3>🏠 本地优先，隐私为王</h3>
+      <ul>
+        <li>所有对话数据运行在你的设备上</li>
+        <li>对话记录完全由你掌控</li>
+        <li>无需担心云端数据泄露</li>
+      </ul>
+      
+      <h3>📱 全平台接入</h3>
+      <p>支持超过15个主流通讯平台：</p>
+      <ul>
+        <li><strong>国际平台</strong>: WhatsApp、Telegram、Discord、Slack、Signal、iMessage</li>
+        <li><strong>国内平台</strong>: 微信、飞书、钉钉、企业微信、QQ机器人</li>
+        <li><strong>其他</strong>: Matrix、IRC、Mattermost、Nostr等</li>
+      </ul>
+      
+      <h3>🎤 语音交互</h3>
+      <ul>
+        <li>macOS/iOS支持语音唤醒</li>
+        <li>Android支持持续语音对话</li>
+        <li>集成ElevenLabs高质量语音服务</li>
+      </ul>
+      
+      <h2>v2026.3.8新功能</h2>
+      <h3>1. 备份系统全面升级</h3>
+      <pre><code>openclaw backup create              # 创建完整备份
+openclaw backup verify              # 验证备份完整性</code></pre>
+      
+      <h3>2. Talk模式智能优化</h3>
+      <p>新增静默超时配置，交互更自然！</p>
+      
+      <h3>3. Brave搜索深度集成</h3>
+      <p>支持Brave的LLM Context端点，搜索结果更精准！</p>
+      
+      <h3>4. ACP来源追踪</h3>
+      <p>可以追溯AI回复的来源和上下文，透明度拉满！</p>
+      
+      <h2>3分钟快速上手</h2>
+      <pre><code># 安装
+npm install -g openclaw@latest
+
+# 配置向导
+openclaw onboard --install-daemon</code></pre>
+      
+      <h2>支持的AI模型</h2>
+      <ul>
+        <li><strong>商业模型</strong>: OpenAI、Claude、Gemini、DeepSeek、Grok、Kimi</li>
+        <li><strong>国产大模型</strong>: 通义千问、文心一言、智谱AI</li>
+        <li><strong>本地模型</strong>: Ollama、LM Studio、vLLM</li>
+      </ul>
+      
+      <h2>社区与资源</h2>
+      <ul>
+        <li>🌐 官网: openclaw.ai</li>
+        <li>📖 文档: docs.openclaw.ai</li>
+        <li>💬 Discord: discord.gg/clawd</li>
+        <li>🛒 技能市场: clawhub.com</li>
+      </ul>
+      
+      <h2>写在最后</h2>
+      <p>AI助手不应该只是大公司的"租赁服务"，它应该像你的手机、电脑一样，<strong>真正属于你</strong>。</p>
+      <p><strong>现在是时候，拥有属于你自己的AI助手了！</strong> 🦞</p>
+    `,
+  },
+  {
     slug: "openclaw-hub-launch-2026",
     title: "OpenClaw Hub 网站正式上线！一站式获取 OpenClaw 资讯",
     excerpt: "OpenClaw Hub 网站正式上线！作为 OpenClaw 社区的内容中心，为用户提供最新的资讯、教程和 Skills 推荐。响应式设计支持所有设备访问...",
