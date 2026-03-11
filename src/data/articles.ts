@@ -13,6 +13,108 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "openclaw-skills-marketplace-guide",
+    title: "OpenCLAW技能市场完全指南：发现、安装与管理 Skills",
+    excerpt: "深入了解OpenCLAW技能市场：如何发现有用的Skills、安装配置、管理更新，以及推荐的主流Skills推荐。",
+    category: "教程",
+    date: "2026-03-12",
+    readTime: "7分钟",
+    icon: "🛒",
+    tags: ["OpenCLAW", "Skills", "技能市场", "插件", "扩展"],
+    author: "OpenCLAW中文社区",
+    content: `
+      <p>OpenCLAW的强大之处在于其<strong>丰富的技能（Skills）生态系统</strong>。本文将详细介绍如何使用技能市场，让你的AI助手更强大！</p>
+      
+      <h2>什么是Skills？</h2>
+      <p>Skills是扩展OpenCLAW功能的模块化组件，可以让你的AI助手：</p>
+      <ul>
+        <li>🌐 自动化浏览器操作</li>
+        <li>📊 管理数据和分析</li>
+        <li>📝 自动发布内容到各平台</li>
+        <li>🔔 设置提醒和定时任务</li>
+        <li>💬 集成各种通讯工具</li>
+      </ul>
+      
+      <h2>访问技能市场</h2>
+      <h3>官方技能市场</h3>
+      <ul>
+        <li><strong>ClawHub</strong>: clawhub.com（国际）</li>
+        <li><strong>SkillHub</strong>: 国内优化版技能市场</li>
+      </ul>
+      
+      <h3>查看已安装技能</h3>
+      <pre><code>openclaw skills list</code></pre>
+      
+      <h2>安装技能</h2>
+      <h3>命令行安装</h3>
+      <pre><code># 安装指定技能
+openclaw skills install &lt;skill-name&gt;
+
+# 例如安装GitHub技能
+openclaw skills install github</code></pre>
+      
+      <h3>常用技能推荐</h3>
+      <table>
+        <tr><th>技能名称</th><th>功能描述</th><th>用途</th></tr>
+        <tr><td>github</td><td>GitHub仓库管理</td><td>PR/Issue/Commits</td></tr>
+        <tr><td>gmail</td><td>Gmail邮件管理</td><td>收发邮件</td></tr>
+        <tr><td>youtube</td><td>YouTube管理</td><td>视频/播放列表</td></tr>
+        <tr><td>xiaohongshu</td><td>小红书运营</td><td>内容发布</td></tr>
+        <tr><td>weather</td><td>天气查询</td><td>实时天气</td></tr>
+        <tr><td>browser</td><td>浏览器自动化</td><td>网页操作</td></tr>
+        <tr><td>tencent-cos</td><td>腾讯云存储</td><td>文件管理</td></tr>
+      </table>
+      
+      <h2>管理技能</h2>
+      <h3>更新技能</h3>
+      <pre><code># 更新所有技能
+openclaw skills update
+
+# 更新指定技能
+openclaw skills update &lt;skill-name&gt;</code></pre>
+      
+      <h3>卸载技能</h3>
+      <pre><code>openclaw skills uninstall &lt;skill-name&gt;</code></pre>
+      
+      <h3>查看技能详情</h3>
+      <pre><code>openclaw skills info &lt;skill-name&gt;</code></pre>
+      
+      <h2>配置技能</h2>
+      <p>每个技能可能有独立的配置选项：</p>
+      <pre><code># 查看技能配置
+openclaw configure skills.&lt;skill-name&gt;</code></pre>
+      
+      <h2>开发自定义技能</h2>
+      <p>如果你有编程能力，可以开发自己的Skills：</p>
+      <ol>
+        <li>创建技能目录结构</li>
+        <li>编写SKILL.md说明文档</li>
+        <li>实现核心功能脚本</li>
+        <li>发布到技能市场</li>
+      </ol>
+      
+      <h2>最佳实践</h2>
+      <ul>
+        <li><strong>按需安装</strong>：只安装真正需要的技能</li>
+        <li><strong>定期更新</strong>：保持技能最新以获得新功能和修复</li>
+        <li><strong>注意权限</strong>：了解技能需要的权限</li>
+        <li><strong>备份配置</strong>：重要配置定期备份</li>
+      </ul>
+      
+      <h2>常见问题</h2>
+      <h3>Q: 技能安装失败怎么办？</h3>
+      <p>检查网络连接，或尝试使用其他技能市场源。</p>
+      
+      <h3>Q: 如何查找需要的技能？</h3>
+      <p>在技能市场网站搜索关键词，或使用openclaw skills search命令。</p>
+      
+      <h2>总结</h2>
+      <p>Skills是OpenCLAW的灵魂，通过合理使用技能市场，你可以让AI助手完成几乎任何任务。快去探索技能市场吧！</p>
+      
+      <p><strong>下一步</strong>：安装一个感兴趣的技能，体验OpenCLAW的无限可能！ 🦞</p>
+    `,
+  },
+  {
     slug: "openclaw-beginner-guide",
     title: "OpenCLAW零基础入门指南：打造你的专属AI助手",
     excerpt: "从零开始配置OpenCLAW：安装、配置、接入通讯平台、选择AI模型，手把手教你打造属于自己的AI助手。",
