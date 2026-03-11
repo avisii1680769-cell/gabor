@@ -128,7 +128,7 @@ export default function Home() {
               💬 联系我们
             </h2>
             <p className="text-lg opacity-90 mb-6">
-              有问题？想要部署自己的网站？
+              把小龙虾培养成您的专属助理
             </p>
             
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6">
