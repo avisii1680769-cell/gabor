@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OpenClaw Hub - 最新资讯与技能分享",
+  title: "Openclaw小龙虾最新资讯",
   description: "OpenClaw 最新动态、Skills 推荐、使用教程与社区资讯",
 };
 

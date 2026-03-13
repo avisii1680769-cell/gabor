@@ -10,7 +10,7 @@ export function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl">🦞</span>
               <span className="text-xl font-bold text-gray-800 dark:text-white">
-                OpenClaw Hub
+                Openclaw小龙虾最新资讯
               </span>
             </div>
             <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md">
@@ -89,7 +89,7 @@ export function Footer() {
 
         <div className="border-t border-gray-200 dark:border-gray-800 mt-12 pt-8 text-center text-gray-500 dark:text-gray-400">
           <p>
-            © {new Date().getFullYear()} OpenClaw Hub. All rights reserved.
+            © {new Date().getFullYear()} Openclaw小龙虾最新资讯. All rights reserved.
           </p>
         </div>
       </div>

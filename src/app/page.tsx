@@ -17,7 +17,7 @@ export default function Home() {
         <section className="mb-12">
           <div className="bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl p-8 md:p-12 text-white">
             <h1 className="text-3xl md:text-5xl font-bold mb-4">
-              OpenClaw Hub
+              Openclaw小龙虾最新资讯
             </h1>
             <p className="text-lg md:text-xl opacity-90 mb-6">
               发现最新 Skills、教程与社区动态

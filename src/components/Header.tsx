@@ -21,7 +21,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl">🦞</span>
             <span className="text-xl font-bold text-gray-800 dark:text-white">
-              OpenClaw Hub
+              Openclaw小龙虾最新资讯
             </span>
           </Link>
 

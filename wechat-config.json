@@ -3,7 +3,7 @@
     "defaultAccount": "openclaw_hub",
     "accounts": {
       "openclaw_hub": {
-        "name": "OpenClaw Hub",
+        "name": "Openclaw小龙虾最新资讯",
         "appId": "YOUR_APP_ID_HERE",
         "appSecret": "YOUR_APP_SECRET_HERE",
         "type": "subscription",

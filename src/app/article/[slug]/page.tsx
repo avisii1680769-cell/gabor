@@ -134,10 +134,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </div>
               <div>
                 <p className="font-semibold text-gray-800 dark:text-white">
-                  {article.author || "OpenClaw Hub"}
+                  {article.author || "Openclaw小龙虾最新资讯"}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  OpenClaw Hub 内容团队
+                  Openclaw小龙虾最新资讯内容团队
                 </p>
               </div>
             </div>
