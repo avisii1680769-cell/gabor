@@ -1,0 +1,16 @@
+{
+  "wechat": {
+    "defaultAccount": "openclaw_hub",
+    "accounts": {
+      "openclaw_hub": {
+        "name": "OpenClaw Hub",
+        "appId": "YOUR_APP_ID_HERE",
+        "appSecret": "YOUR_APP_SECRET_HERE",
+        "type": "subscription",
+        "enabled": true
+      }
+    },
+    "apiBaseUrl": "https://api.weixin.qq.com",
+    "tokenCacheDir": "./.tokens"
+  }
+}
