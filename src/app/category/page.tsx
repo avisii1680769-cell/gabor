@@ -4,12 +4,26 @@ import Link from "next/link";
 import { articles } from "@/data/articles";
 
 export default function CategoryIndexPage() {
-  // 统计每个分类的文章数量
-  const categoryStats = [
-    { name: "Skills 推荐", icon: "🛠️", path: "skills", count: 4 },
-    { name: "使用教程", icon: "📚", path: "jiaocheng", count: 6 },
-    { name: "新闻", icon: "📰", path: "xinwen", count: 1 },
+  // 定义所有分类
+  const categories = [
+    { name: "教程", icon: "📚", path: "jiaocheng", desc: "从入门到精通" },
+    { name: "Skills", icon: "🛠️", path: "skills", desc: "技能推荐与指南" },
+    { name: "新闻", icon: "📰", path: "xinwen", desc: "最新动态公告" },
+    { name: "技术深度", icon: "🔬", path: "tech-deep", desc: "原理架构解析" },
+    { name: "最佳实践", icon: "💡", path: "best-practice", desc: "使用技巧分享" },
+    { name: "案例分析", icon: "📊", path: "case-studies", desc: "真实应用案例" },
+    { name: "社区动态", icon: "👥", path: "community", desc: "社区活动故事" },
+    { name: "工具推荐", icon: "🔧", path: "tools", desc: "周边工具资源" },
+    { name: "问答精选", icon: "❓", path: "qa", desc: "常见问题解答" },
+    { name: "安全专栏", icon: "🔒", path: "security", desc: "安全最佳实践" },
+    { name: "性能优化", icon: "⚡", path: "performance", desc: "性能调优技巧" },
+    { name: "集成指南", icon: "🔗", path: "integration", desc: "工具集成方案" },
   ];
+
+  // 统计每个分类的文章数量
+  const getCategoryCount = (name: string) => {
+    return articles.filter(a => a.category === name).length;
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -18,24 +32,8 @@ export default function CategoryIndexPage() {
       <main className="flex-grow container mx-auto px-4 py-8 max-w-6xl">
         {/* Back to Home */}
         <div className="mb-6">
-          <Link
-            href="/"
-            className="inline-flex items-center text-orange-600 hover:underline"
-          >
-            <svg
-              className="w-4 h-4 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            返回首页
+          <Link href="/" className="inline-flex items-center text-orange-600 hover:underline">
+            ← 返回首页
           </Link>
         </div>
 
@@ -46,32 +44,35 @@ export default function CategoryIndexPage() {
             分类浏览
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            按分类查看 OpenClaw 相关文章
+            按分类查看 OpenClaw 相关文章 · 每日自动更新
           </p>
         </div>
 
         {/* Category Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {categoryStats.map((cat) => (
-            <Link
-              key={cat.path}
-              href={`/category/${cat.path}`}
-              className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group text-center"
-            >
-              <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
-                {cat.icon}
-              </div>
-              <h2 className="text-xl font-bold mb-2 text-gray-800 dark:text-white">
-                {cat.name}
-              </h2>
-              <p className="text-gray-500 dark:text-gray-400">
-                {cat.count} 篇文章
-              </p>
-              <div className="mt-4 text-orange-600 font-medium group-hover:translate-x-1 transition-transform">
-                查看 →
-              </div>
-            </Link>
-          ))}
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {categories.map((cat) => {
+            const count = getCategoryCount(cat.name);
+            return (
+              <Link
+                key={cat.path}
+                href={`/category/${cat.path}`}
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition-all group text-center"
+              >
+                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
+                  {cat.icon}
+                </div>
+                <h2 className="text-lg font-bold mb-1 text-gray-800 dark:text-white">
+                  {cat.name}
+                </h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                  {cat.desc}
+                </p>
+                <p className="text-orange-600 font-medium">
+                  {count} 篇文章
+                </p>
+              </Link>
+            );
+          })}
         </div>
 
         {/* All Articles Link */}
